@@ -32,8 +32,10 @@ logo colors
 {
   "Black olive":"353531",
   "Wheat":"e1cfa3",
-  "Powder Blue":"aeb9d5", // 869dd9 powder blue a lil more saturated
-  "Atomic Tangerine":"e7a188"// cb9599 tweener(powder blue mixed w/ atomic tangerine) but a lil more saturated
+  "Atomic tangerine":"e7a188",
+  "Rosy brown":"cb9599",
+  "Powder blue":"aeb9d5",
+  "Vista Blue":"869dd9"
 }
 ```
 

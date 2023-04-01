@@ -1,26 +1,30 @@
 @echo off
 
-For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set mydate=%%c-%%a-%%b)
-For /f "tokens=1-2 delims=/:" %%a in ('time /t') do (set mytime=%%a%%b)
+IF "%1"=="" (
+  echo Choose an option:
+  echo 1. run
+  echo 2. redo
+  echo 3. revert
+  set /p choice=Type 1, 2 or 3, then press Enter: 
+) ELSE (
+  set choice=%1
+)
 
-echo Choose an option:
-echo 1. run
-echo 2. redo
+set mydate=%date:~10,4%-%date:~4,2%-%date:~7,2%
+set mytime=%time:~0,2%%time:~3,2%
 
-set /p choice=Type 1 or 2, then press Enter: 
-if %choice%==1 (
+IF "%choice%"=="1" (
   echo applying migration...
   diesel migration run
-) else if %choice%==2 (
+) ELSE IF "%choice%"=="2" (
   echo redoing migration...
   diesel migration redo
-) else (
+) ELSE IF "%choice%"=="3" (
+  echo reverting migration...
+  diesel migration revert
+) ELSE (
   echo Invalid choice. Exiting.
-  GOTO End1
+  exit /b 1
 )
 
 echo %mydate%_%mytime%: migration completed.
-GOTO End1
-
-:End1
-PAUSE
