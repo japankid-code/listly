@@ -10,6 +10,9 @@ run with
 .\target\debug\listly.exe # no ".exe" off windows
 # OR
 cargo watch -q -c -w src/ -x run
+# run database things with
+create-migration.bat # or *.sh on linux
+update-database.bat # or *.sh on linux, *-deploy.sh on deploy
 ```
 
 ## steps taken so far

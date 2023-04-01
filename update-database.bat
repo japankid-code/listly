@@ -4,8 +4,8 @@ For /f "tokens=2-4 delims=/ " %%a in ('date /t') do (set mydate=%%c-%%a-%%b)
 For /f "tokens=1-2 delims=/:" %%a in ('time /t') do (set mytime=%%a%%b)
 
 echo Choose an option:
-echo 1. diesel migration run
-echo 2. diesel migration redo
+echo 1. run
+echo 2. redo
 
 set /p choice=Type 1 or 2, then press Enter: 
 if %choice%==1 (

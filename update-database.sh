@@ -4,8 +4,8 @@ mydate=$(date +"%Y-%m-%d")
 mytime=$(date +"%H%M")
 
 echo "Choose an option:"
-echo "1. diesel migration run"
-echo "2. diesel migration redo"
+echo "1. run"
+echo "2. redo"
 
 read -p "Type 1 or 2, then press Enter: " choice
 
