@@ -2,15 +2,14 @@
 
 diesel::table! {
     users (id) {
-        id -> Binary,
+        id -> Varchar,
         google_id -> Varchar,
         provider -> Varchar,
         email -> Varchar,
         first_name -> Varchar,
         last_name -> Varchar,
         photo -> Varchar,
-        verified -> Bool,
-        created_at -> Nullable<Timestamp>,
-        updated_at -> Nullable<Timestamp>,
+        created_at -> Timestamp,
+        updated_at -> Timestamp,
     }
 }
