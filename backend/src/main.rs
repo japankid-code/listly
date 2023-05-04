@@ -6,8 +6,6 @@ mod database_connection;
 mod diesel_schema;
 use database_connection::{new_pool, MySqlPool, MySqlPooledConnection};
 use diesel;
-#[path = "./api/controllers/db_health_check_controller.rs"]
-mod db_health_check_controller;
 #[path = "./api/controllers/health_check_controller.rs"]
 mod health_check_controller;
 #[path = "./api/controllers/user_controller.rs"]
@@ -29,7 +27,6 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .service(health_check_controller::health_checker_handler)
-            .service(db_health_check_controller::db_health_check)
             .app_data(my_sql_pool.clone())
             .service(web::scope("/api").configure(user_controller::config))
             .wrap(Logger::default())
