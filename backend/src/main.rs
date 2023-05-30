@@ -20,9 +20,16 @@ async fn main() -> std::io::Result<()> {
     }
     env_logger::init();
 
+    dotenv().ok().expect("no .env file found");
+
+    let server_host_address =
+        env::var("SERVER_HOST_ADDRESS").expect("SERVER_HOST_ADDRESS must be set");
+
     println!("🚀 Server started successfully");
 
     let my_sql_pool: web::Data<MySqlPool> = web::Data::new(new_pool());
+
+    println!("Database pool created");
 
     HttpServer::new(move || {
         App::new()
@@ -31,7 +38,7 @@ async fn main() -> std::io::Result<()> {
             .service(web::scope("/api").configure(user_controller::config))
             .wrap(Logger::default())
     })
-    .bind(("127.0.0.1", 8000))?
+    .bind((server_host_address, 8000))?
     .run()
     .await
 }
