@@ -9,9 +9,10 @@ install MySql and start service on local machine
 run backend with the following commands
 
 ```bash
-.\target\debug\listly.exe # no ".exe" off windows
+.\backend\target\debug\listly.exe # no ".exe" off windows
 # OR
-cd .\backend\ cargo watch -q -c -w src/ -x run
+cd .\backend\
+cargo watch -q -c -w src/ -x run
 # run database things with
 create-migration.bat # add migration with name
 update-database.bat # run migrations
@@ -46,10 +47,10 @@ diesel setup #this creates the database and adds migration folder
 
 docker compose command runs mysql container and backend rust container, react native frontend container too someday ;)
 
-no way to run migrations at the moment...
-
 ```bash
 docker compose up -d --build
+
+# migrations can be run by sending get request to /api/migrations/run
 ```
 
 logo colors
