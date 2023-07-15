@@ -1,0 +1,56 @@
+name: listly-app
+services:
+  # frontend:
+  #   ports:
+  #     - 8080:8080
+  #   build:
+  #     context: ../frontend
+  #     target: dev-envs
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   networks:
+  #     - frontend
+
+  backend:
+    container_name: "listly-compose-backend"
+    env_file:
+      - docker.env
+      - .env
+    image: listly-backend
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      RUST_LOG: "debug"
+      RUST_BACKTRACE: "full"
+    # restart: unless-stopped
+    networks:
+      - backend
+      # - frontend
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    container_name: "listly-mysql-db"
+    environment:
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+    restart: unless-stopped
+    networks:
+      - backend
+    ports:
+     - "3306:3306"
+    volumes:
+      - ./db-data/test:/var/lib/mysql_src
+
+networks:
+  # frontend: {}
+  backend: {}
+
+volumes:
+  backend-cache: {}
+  db-data: {}
